@@ -10,4 +10,21 @@ rosrun rbd_spot_perception stream_image.py -s\
        right_depth_in_visual_frame\
        back_fisheye_image\
        back_depth_in_visual_frame\
-       --pub
+       hand_color_image\
+       hand_depth_in_hand_color_frame\
+       --format JPEG --pub
+
+#rosrun rbd_spot_perception stream_image.py -s\
+#       frontleft_visual_in_depth_frame\
+#       frontleft_depth\
+#       frontright_visual_in_depth_frame\
+#       frontright_depth\
+#       left_visual_in_depth_frame\
+#       left_depth\
+#       right_visual_in_depth_frame\
+#       right_depth\
+#       back_visual_in_depth_frame\
+#       back_depth\
+#       hand_color_image\
+#       hand_depth_in_hand_color_frame\
+#       --pub

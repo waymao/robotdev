@@ -62,7 +62,11 @@ def main():
     while True:
         try:
             result, time_taken = rbd_spot.image.getImage(image_client, image_requests)
+            # TODO compress image here 
+            # TODO combine with depth data
             print(time_taken)
+            print(type(result))
+            print(result)
             if args.pub:
                 rbd_spot.image.ros_publish_image_result(conn, result, publishers)
             _used_time = time.time() - _start_time

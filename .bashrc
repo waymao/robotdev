@@ -93,7 +93,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias screen="screen -c ~/spot.screenrc" # sets up all four launch terminals
 alias sourcespot="cd /home/ericbot/repo/robotdev; source setup_spot.bash"
-alias launch1="roslaunch rbd_spot_robot driver.launch cameras_used:=\"rear, front, side\" control:=true force:=true"
+alias launch1="roslaunch rbd_spot_robot driver.launch cameras_used:=\"rear, front, side\" auto_stand:=false control:=true force:=true"
 alias launch2="roslaunch file_server spot.launch"
 
 alias bodycams="./spot/ros_ws/src/rbd_spot_perception/scripts/stream_body_camerasets.sh"
