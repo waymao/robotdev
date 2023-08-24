@@ -25,10 +25,29 @@ fi
 SPOT_ETH_IP="10.0.0.3"
 # SPOT_WIFI_IP="192.168.80.22"
 # Gouger 
-# SPOT_WIFI_IP="138.16.161.21"
+SPOT_WIFI_IP="138.16.161.21"
 # Tusker
-SPOT_WIFI_IP="138.16.161.22"
-#SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+#SPOT_WIFI_IP="138.16.161.22"
+SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+
+# Determine which Spot to connect to. Defaults to Tusker
+if [ "$1" == "gouger" ]; then # Gouger
+    echo "Connecting to Gouger"
+    SPOT_ID="12"
+    SPOT_WIFI_IP="138.16.161.21"
+    # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+    SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+else #elif [ $1 == "tusker" ]; then # Tusker
+    echo "Connecting to Tusker"
+    SPOT_ID="22"
+    SPOT_WIFI_IP="138.16.161.22"
+    SPOT_ETH_IP="10.0.0.3"
+    # SPOT_RLAB_IP="tusker.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+    SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+fi
+    
+
+
 
 #------------- FUNCTIONS  ----------------
 # Always assume at the start of a function,
@@ -39,19 +58,21 @@ function detect_spot_connection
 {
     # Detects the spot connection by pinging.
     # Sets two variables, 'spot_conn' and 'spot_ip'
+
+    echo -e "Pinging Spot Ethernet IP $SPOT_ETH_IP..."
+    echo "Pinging Spot ethernet IP"
+    if ping_success $SPOT_ETH_IP; then
+        echo -e "OK"
+        spot_conn="ethernet"
+        spot_ip=$SPOT_ETH_IP
+        true && return
+    fi
+
     echo -e "Pinging Spot WiFi IP $SPOT_WIFI_IP..."
     if ping_success $SPOT_WIFI_IP; then
         echo -e "OK"
         spot_conn="spot wifi"
         spot_ip=$SPOT_WIFI_IP
-        true && return
-    fi
-
-    echo -e "Pinging Spot Ethernet IP $SPOT_ETH_IP..."
-    if ping_success $SPOT_ETH_IP; then
-        echo -e "OK"
-        spot_conn="ethernet"
-        spot_ip=$SPOT_ETH_IP
         true && return
     fi
 
@@ -213,6 +234,7 @@ if confirm "Are you working on the real robot ?"; then
     # Check if the environment variable SPOT_IP is set.
     # If not, then try to detect spot connection and set it.
     if [ -z $SPOT_IP ]; then
+       echo "Detecting spot connection..."
        if detect_spot_connection; then
            export SPOT_IP=${spot_ip}
            export SPOT_CONN=${spot_conn}

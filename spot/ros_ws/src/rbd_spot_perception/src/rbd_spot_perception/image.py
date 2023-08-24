@@ -60,8 +60,8 @@ def ros_create_publishers(sources, name_space="stream_image"):
         publishers[source] = {
             "image": rospy.Publisher(
                 f"/spot/{name_space}/{source}/image",
-                sensor_msgs.msg.CompressedImage, queue_size=10),
-                #sensor_msgs.msg.Image, queue_size=10),
+                #sensor_msgs.msg.CompressedImage, queue_size=10),
+                sensor_msgs.msg.Image, queue_size=10),
             "camera_info": rospy.Publisher(
                 f"/spot/{name_space}/{source}/camera_info",
                 sensor_msgs.msg.CameraInfo, queue_size=10)
@@ -88,8 +88,8 @@ def ros_publish_image_result(conn, get_image_result, publishers, broadcast_tf=Tr
             spot_driver.ros_helpers._getImageMsg(image_response, local_time)
         source_name = image_response.source.name
         publishers[source_name]['image'].publish(image_msg)
-        publishers[source_name]['camera_info'].publish(camera_info_msg)
-        rospy.loginfo(f"Published image response from {source_name}")
+        # publishers[source_name]['camera_info'].publish(camera_info_msg)
+        # rospy.loginfo(f"Published image response from {source_name}")
 
         if broadcast_tf:
             populate_camera_static_transforms(conn, image_response, tf_frames)

@@ -36,6 +36,6 @@ The following conventions apply to `rbd_spot_*` packages:
    then do 'requests'.
 
  - If the output (returned object) is a request to a protobuf service,
-   teh variable is suffixed by `_request`
+   the variable is suffixed by `_request`
 
  - If the function is ros-related, prefix the function with `ros_`
