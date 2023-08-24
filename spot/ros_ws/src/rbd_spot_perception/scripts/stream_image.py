@@ -13,7 +13,8 @@ import rospy
 import rbd_spot
 import pandas as pd
 import sys
-
+from bosdyn.api import image_pb2
+from bosdyn.client.image import ImageClient, build_image_request
 
 def main():
     parser = argparse.ArgumentParser("stream image")
@@ -35,6 +36,9 @@ def main():
     sources_df = pd.DataFrame(rbd_spot.image.sources_result_to_dict(sources_result))
     print("Available image sources:")
     print(sources_df, "\n")
+    with open('stream_info.txt', 'w') as f:
+        f.write(str(sources_result))
+
 
     if args.sources is None or len(args.sources) == 0:
         # nothing to do.
@@ -48,25 +52,41 @@ def main():
 
     # Create publishers, in case we want to publish;
     # maps from source name to a publisher.
+    node_name = "stream_image"
+    if "depth" in args.sources[0]:
+        node_name = "stream_depth"
     if args.pub:
-        rospy.init_node("stream_image")
+        rospy.init_node(node_name)
         publishers = rbd_spot.image.ros_create_publishers(args.sources, name_space="stream_image")
 
     # We want to stream the image sources, publish as ROS message if necessary
     # First, build requests
-    image_requests = rbd_spot.image.build_image_requests(
-        args.sources, quality=args.quality, fmt=args.format)
+    rgb_format = dict(image_pb2.Image.PixelFormat.items()).get("PIXEL_FORMAT_RGB_U8")
+    image_format = image_pb2.Image.Format.Value(f"FORMAT_{args.format}")
+    image_requests = []
+    # Build requests iteratively, setting pixel format
+    for source in args.sources:
+        pixel_format = rgb_format if "fisheye" in source else None
+        image_requests.append(build_image_request(source, quality_percent=args.quality, image_format=image_format, pixel_format=pixel_format))
+
+    #image_requests = rbd_spot.image.build_image_requests(
+    #    args.sources, quality=args.quality, fmt=args.format, pixel_format=pixel_format)
 
     # Stream the image through specified sources
     _start_time = time.time()
+    num_iterations = 0
+    sum_time_taken = 0.0
     while True:
         try:
+            #import pdb
+            #pdb.set_trace()
+            #print(image_requests)
             result, time_taken = rbd_spot.image.getImage(image_client, image_requests)
-            # TODO compress image here 
-            # TODO combine with depth data
-            print(time_taken)
-            print(type(result))
-            print(result)
+            sum_time_taken += time_taken
+            num_iterations += 1
+            if num_iterations == 300:
+                print(node_name, " - time taken: ", time_taken, "  , average time taken: ", (sum_time_taken/num_iterations), " -- ", num_iterations)
+            # print(time_taken)
             if args.pub:
                 rbd_spot.image.ros_publish_image_result(conn, result, publishers)
             _used_time = time.time() - _start_time
@@ -78,3 +98,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+ 
