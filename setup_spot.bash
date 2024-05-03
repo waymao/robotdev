@@ -22,13 +22,16 @@ if [ $SPOT_ID != "12" ] && [ $SPOT_ID != "22" ]; then
 fi
 
 # Configure the IP addresses for different network connections
-SPOT_ETH_IP="10.0.0.3"
+# SPOT_ETH_IP="10.0.0.3"
 # SPOT_WIFI_IP="192.168.80.22"
 # Gouger 
 SPOT_WIFI_IP="138.16.161.21"
 # Tusker
-#SPOT_WIFI_IP="138.16.161.22"
-SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+SPOT_WIFI_IP="138.16.161.22"
+# Rooter
+SPOT_WIFI_IP="138.16.161.23"
+# SPOT_WIFI_IP="192.168.1.4" # For connecting to Asus router when on the go
+#SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
 
 # Determine which Spot to connect to. Defaults to Tusker
 if [ "$1" == "gouger" ]; then # Gouger
@@ -37,16 +40,38 @@ if [ "$1" == "gouger" ]; then # Gouger
     SPOT_WIFI_IP="138.16.161.21"
     # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
     SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
-else #elif [ $1 == "tusker" ]; then # Tusker
+elif [ $1 == "tusker" ]; then # Tusker
     echo "Connecting to Tusker"
     SPOT_ID="22"
     SPOT_WIFI_IP="138.16.161.22"
-    SPOT_ETH_IP="10.0.0.3"
     # SPOT_RLAB_IP="tusker.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
-    SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+    #SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+    SPOT_RLAB_IP="192.168.1.4"
+
+    # this is for spotwifi network on the local ASUS router
+    # SPOT_ETH_IP="192.168.1.122"
+
+elif [ $1 == "rooter" ]; then # Rooter
+    echo "Connecting to Rooter"
+    SPOT_ID="23"
+    SPOT_WIFI_IP="138.16.161.23"
+    SPOT_RLAB_IP="192.168.1.4"
+    # RLAB
+    SPOT_ETH_IP="138.16.160.221"
+    
+    # this is for spotwifi network on the local ASUS router
+    # SPOT_ETH_IP="192.168.1.104"
+elif [ $1 == "snouter" ]; then # Snouter
+    echo "Connecting to Snouter"
+    SPOT_ID="24"
+    SPOT_WIFI_IP="138.16.161.24"
+    SPOT_RLAB_IP="192.168.1.4"
+     
+    # this is for spotwifi network on the local ASUS router
+    SPOT_ETH_IP="192.168.1.122"
 fi
     
-
+# new robot is 138.16.161.230
 
 
 #------------- FUNCTIONS  ----------------

@@ -15,6 +15,7 @@ class SpotSDKConn:
     # Assumes you have successfully run source setup_spot.sh
     sdk_name: str
     hostname: str = os.environ['SPOT_IP']
+    print("hostname:", hostname, ". in /home/ericbot/repo/robotdev/spot/ros_ws/src/rbd_spot_robot/src/rbd_spot_robot/spot_sdk_conn.py")
     username: str = "user"
     password: str = os.environ['SPOT_USER_PASSWORD']
     conn_type: str = os.environ['SPOT_CONN'].replace(" ", "_")
