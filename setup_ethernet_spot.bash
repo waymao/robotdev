@@ -40,7 +40,7 @@ if [ "$1" == "gouger" ]; then # Gouger
     SPOT_WIFI_IP="138.16.161.21"
     # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
     SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
-    SPOT_ETH_IP="138.16.160.87"
+    SPOT_ETH_IP="138.16.160.77"
 elif [ $1 == "tusker" ]; then # Tusker
     echo "Connecting to Tusker"
     SPOT_ID="22"

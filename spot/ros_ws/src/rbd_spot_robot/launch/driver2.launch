@@ -2,15 +2,15 @@
 
   <arg name="username" default="user" />
   <arg name="password" default="$(env SPOT_USER_PASSWORD)" />
-  <arg name="network" default="$(env SPOT_CONN2)"/>
-  <arg name="hostname" default="$(env SPOT_IP2)"/>
+  <arg name="network" default="$(env SPOT_CONN)"/>
+  <arg name="hostname" default="$(env SPOT_IP)"/>
   <arg name="estop_timeout" default="9.0"/>
   <arg name="cameras_used" default="[]" />
   <!-- whether we would like to control the robot -->
   <arg name="control" default="false" />
   <arg name="force" default="false" />
 
-  <include file="$(find spot_driver)/launch/driver.launch">
+  <include file="$(find spot_driver)/launch/driver2.launch">
     <arg name="username" value="$(arg username)"/>
     <arg name="password" value="$(arg password)"/>
     <arg name="hostname" value="$(arg hostname)"/>

@@ -89,6 +89,7 @@ def set_far_plane(data):
 
 def main():
     parser = argparse.ArgumentParser("stream image")
+    parser.add_argument("-i", "--id", help="unique spot id", type=str, default="")
     parser.add_argument("-s", "--sources", nargs="+", help="image sources; or 'list'")
     parser.add_argument("-q", "--quality", type=int,
                         help="image quality [0-100]", default=75)
@@ -124,21 +125,21 @@ def main():
     # Create publishers, in case we want to publish;
     # maps from source name to a publisher.
     # Determine whether this is a depth or extrinsics publisher
-    node_name = "stream_image"
+    node_name = f"stream_image{args.id}"
     pub_extrinsics = False
     if "depth" in args.sources[0]:
-        node_name = "stream_depth"
+        node_name = f"stream_depth{args.id}"
         farplane_subscriber = rospy.Subscriber('set_far_plane', Float32, set_far_plane, queue_size = 1) 
     elif "extrinsics" in args.sources[0]:
         pub_names = ['hand', 'frontright_fisheye', 'frontleft_fisheye', 'left_fisheye', 'right_fisheye', 'back_fisheye']
         #pub_names = ['frontright_fisheye', 'frontleft_fisheye']#, 'hand']
-        pub_names = [f"/spot/{name}_extrinsics" for name in pub_names]
+        pub_names = [f"/spot{args.id}/{name}_extrinsics" for name in pub_names]
         ext_pubs = [rospy.Publisher(name, Pose, queue_size=10) for name in pub_names]
         pub_extrinsics = True
-        node_name = "stream_extrinsics"
+        node_name = f"stream_extrinsics{args.id}"
     if args.pub:
         rospy.init_node(node_name)
-        publishers = rbd_spot.image.ros_create_publishers(args.sources, name_space="stream_image")
+        publishers = rbd_spot.image.ros_create_publishers(args.sources, name_space=f"stream_image{args.id}")
 
     # We want to stream the image sources, publish as ROS message if necessary
     # First, build requests

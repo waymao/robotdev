@@ -1,0 +1,379 @@
+[name: "back_depth"
+cols: 424
+rows: 240
+depth_scale: 999.0
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 216.466796875
+      y: 216.466796875
+    }
+    principal_point {
+      x: 214.9622039794922
+      y: 117.4821548461914
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "back_depth_in_visual_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 329.93157958984375
+      y: 328.90740966796875
+    }
+    principal_point {
+      x: 314.4230651855469
+      y: 234.90972900390625
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "back_fisheye_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 329.93157958984375
+      y: 328.90740966796875
+    }
+    principal_point {
+      x: 314.4230651855469
+      y: 234.90972900390625
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "frontleft_depth"
+cols: 424
+rows: 240
+depth_scale: 999.0
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 214.14495849609375
+      y: 214.14495849609375
+    }
+    principal_point {
+      x: 211.91629028320312
+      y: 116.37345886230469
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "frontleft_depth_in_visual_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 328.1859436035156
+      y: 327.1475830078125
+    }
+    principal_point {
+      x: 315.9046936035156
+      y: 244.67686462402344
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "frontleft_fisheye_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 328.1859436035156
+      y: 327.1475830078125
+    }
+    principal_point {
+      x: 315.9046936035156
+      y: 244.67686462402344
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "frontright_depth"
+cols: 424
+rows: 240
+depth_scale: 999.0
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 222.87449645996094
+      y: 222.87449645996094
+    }
+    principal_point {
+      x: 198.48263549804688
+      y: 115.24867248535156
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "frontright_depth_in_visual_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 330.7203063964844
+      y: 329.7578430175781
+    }
+    principal_point {
+      x: 316.46453857421875
+      y: 236.39564514160156
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "frontright_fisheye_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 330.7203063964844
+      y: 329.7578430175781
+    }
+    principal_point {
+      x: 316.46453857421875
+      y: 236.39564514160156
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "hand_color_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 552.0291012161067
+      y: 552.0291012161067
+    }
+    principal_point {
+      x: 320.0
+      y: 240.0
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "hand_color_in_hand_depth_frame"
+cols: 224
+rows: 171
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 210.49806213378906
+      y: 210.49806213378906
+    }
+    principal_point {
+      x: 111.22337341308594
+      y: 87.97607421875
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "hand_depth"
+cols: 224
+rows: 171
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 210.49806213378906
+      y: 210.49806213378906
+    }
+    principal_point {
+      x: 111.22337341308594
+      y: 87.97607421875
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "hand_depth_in_hand_color_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 552.0291012161067
+      y: 552.0291012161067
+    }
+    principal_point {
+      x: 320.0
+      y: 240.0
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "hand_image"
+cols: 224
+rows: 171
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 210.49806213378906
+      y: 210.49806213378906
+    }
+    principal_point {
+      x: 111.22337341308594
+      y: 87.97607421875
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "left_depth"
+cols: 424
+rows: 240
+depth_scale: 999.0
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 217.82107543945312
+      y: 217.82107543945312
+    }
+    principal_point {
+      x: 214.52761840820312
+      y: 116.78765106201172
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "left_depth_in_visual_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 328.8010559082031
+      y: 327.73309326171875
+    }
+    principal_point {
+      x: 313.0207214355469
+      y: 239.3861083984375
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "left_fisheye_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 328.8010559082031
+      y: 327.73309326171875
+    }
+    principal_point {
+      x: 313.0207214355469
+      y: 239.3861083984375
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+, name: "right_depth"
+cols: 424
+rows: 240
+depth_scale: 999.0
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 221.0380859375
+      y: 221.0380859375
+    }
+    principal_point {
+      x: 221.36972045898438
+      y: 114.7853775024414
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "right_depth_in_visual_frame"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 331.13275146484375
+      y: 330.2632751464844
+    }
+    principal_point {
+      x: 316.4153747558594
+      y: 241.007080078125
+    }
+  }
+}
+image_type: IMAGE_TYPE_DEPTH
+pixel_formats: PIXEL_FORMAT_DEPTH_U16
+image_formats: FORMAT_RAW
+, name: "right_fisheye_image"
+cols: 640
+rows: 480
+pinhole {
+  intrinsics {
+    focal_length {
+      x: 331.13275146484375
+      y: 330.2632751464844
+    }
+    principal_point {
+      x: 316.4153747558594
+      y: 241.007080078125
+    }
+  }
+}
+image_type: IMAGE_TYPE_VISUAL
+pixel_formats: PIXEL_FORMAT_GREYSCALE_U8
+pixel_formats: PIXEL_FORMAT_RGB_U8
+image_formats: FORMAT_JPEG
+image_formats: FORMAT_RAW
+]

@@ -262,6 +262,7 @@ if confirm "Are you working on the real robot ?"; then
     if [ -z $SPOT_IP ]; then
        echo "Detecting spot connection..."
        if detect_spot_connection; then
+           echo "conn2 is set"
            export SPOT_IP2=${spot_ip}
            export SPOT_CONN2=${spot_conn}
        fi
