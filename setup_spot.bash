@@ -34,47 +34,55 @@ fi
 #SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
 
 # Determine which Spot to connect to. Defaults to Tusker
-if [ "$1" == "gouger" ]; then # Gouger
-    echo "Connecting to Gouger"
-    SPOT_ID="12"
-    SPOT_WIFI_IP="138.16.161.21"
-    # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
-    SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
-    SPOT_ETH_IP="138.16.160.87"
-elif [ $1 == "tusker" ]; then # Tusker
-    echo "Connecting to Tusker"
-    SPOT_ID="22"
-    SPOT_WIFI_IP="138.16.161.22"
-    # SPOT_RLAB_IP="tusker.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
-    #SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
-    SPOT_RLAB_IP="192.168.1.4"
-
-    # this is for spotwifi network on the local ASUS router
-    SPOT_ETH_IP="138.16.160.88"
-    # SPOT_ETH_IP="192.168.1.122"
-
-elif [ $1 == "rooter" ]; then # Rooter
-    echo "Connecting to Rooter"
-    SPOT_ID="23"
-    SPOT_WIFI_IP="138.16.161.23"
-    SPOT_RLAB_IP="192.168.1.4"
-    # RLAB
-    SPOT_ETH_IP="192.168.1.4"
-    SPOT_ETH_IP="138.16.160.89"
-    
-    # this is for spotwifi network on the local ASUS router
-    # SPOT_ETH_IP="192.168.1.104"
-elif [ $1 == "snouter" ]; then # Snouter
-    echo "Connecting to Snouter"
-    SPOT_ID="24"
-    SPOT_WIFI_IP="138.16.161.24"
-    SPOT_RLAB_IP="192.168.1.4"
-     
-    # this is for spotwifi network on the local ASUS router
-    # SPOT_ETH_IP="192.168.1.122"
-    SPOT_ETH_IP="138.16.160.90"
+if [ -n $SPOT_IP ]; then
+    unset SPOT_IP
+    echo "Overriding SPOT_IP"
 fi
-    
+if [ -z $SPOT_IP ]; then
+    if [ "$1" == "gouger" ]; then # Gouger
+        echo "Connecting to Gouger"
+        SPOT_ID="12"
+        SPOT_WIFI_IP="138.16.161.21"
+        # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+        SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+        SPOT_ETH_IP="138.16.160.87"
+    elif [ $1 == "tusker" ]; then # Tusker
+        echo "Connecting to Tusker"
+        SPOT_ID="22"
+        SPOT_WIFI_IP="138.16.161.22"
+        # SPOT_RLAB_IP="tusker.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
+        #SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+        SPOT_RLAB_IP="192.168.1.4"
+
+        # this is for spotwifi network on the local ASUS router
+        SPOT_ETH_IP="138.16.160.88"
+        # SPOT_ETH_IP="192.168.1.122"
+
+    elif [ $1 == "rooter" ]; then # Rooter
+        echo "Connecting to Rooter"
+        SPOT_ID="23"
+        SPOT_WIFI_IP="138.16.161.23"
+        SPOT_RLAB_IP="192.168.1.4"
+        # RLAB
+        SPOT_ETH_IP="192.168.1.4"
+        SPOT_ETH_IP="138.16.160.89"
+        
+        # this is for spotwifi network on the local ASUS router
+        # SPOT_ETH_IP="192.168.1.104"
+    elif [ $1 == "snouter" ]; then # Snouter
+        echo "Connecting to Snouter"
+        SPOT_ID="24"
+        SPOT_WIFI_IP="138.16.161.24"
+        SPOT_RLAB_IP="192.168.1.4"
+        
+        # this is for spotwifi network on the local ASUS router
+        # SPOT_ETH_IP="192.168.1.122"
+        SPOT_ETH_IP="138.16.160.90"
+    fi
+else
+    echo "!! SPOT_IP has already been set to $SPOT_IP. Ignoring Spot IP auto configuration."
+    echo "!! run \`unset SPOT_IP\` to force spot ip auto configuration."
+fi
 # new robot is 138.16.161.230
 
 

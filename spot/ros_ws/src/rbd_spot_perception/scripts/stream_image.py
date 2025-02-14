@@ -69,7 +69,7 @@ def publish_extrinsics(image_client, pubs):
             if source == "hand":
                 body_tform = get_a_tform_b(img_snapshot, a,"hand_color_image_sensor")
             else:
-                 body_tform = get_a_tform_b(img_snapshot, a, source)
+                body_tform = get_a_tform_b(img_snapshot, a, source)
             
             # Calculate the euler angles
             euler = euler_from_quaternion(body_tform.rotation.w, body_tform.rotation.x, body_tform.rotation.y, body_tform.rotation.z)
@@ -156,6 +156,12 @@ def main():
 
     # Stream the image through specified sources
     _start_time = time.time()
+    if args.id is None:
+        static_tf_prefix = ""
+    elif args.id == "1":
+        static_tf_prefix = "spot/"
+    else:
+        static_tf_prefix = f"spot{args.id}/"
     while True:
         try:
             if pub_extrinsics:
@@ -187,7 +193,7 @@ def main():
                 #         result[i].shot.image.data = bytes(cv_depth)
                 #print(f"FPS: {1/time_taken:.2f}")
                 if args.pub:
-                    rbd_spot.image.ros_publish_image_result(conn, result, publishers)
+                    rbd_spot.image.ros_publish_image_result(conn, result, publishers, broadcast_tf_predix=static_tf_prefix)
                 _used_time = time.time() - _start_time
                 if args.timeout and _used_time > args.timeout:
                     break

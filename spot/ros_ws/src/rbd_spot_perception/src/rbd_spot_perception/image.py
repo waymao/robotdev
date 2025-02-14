@@ -69,7 +69,7 @@ def ros_create_publishers(sources, name_space="stream_image"):
     return publishers
 
 
-def ros_publish_image_result(conn, get_image_result, publishers, broadcast_tf=True):
+def ros_publish_image_result(conn, get_image_result, publishers, broadcast_tf=True, broadcast_tf_predix=""):
     """
     Publishes images in response as ROS messages (sensor_msgs.Image)
     Args:
@@ -92,7 +92,7 @@ def ros_publish_image_result(conn, get_image_result, publishers, broadcast_tf=Tr
         # rospy.loginfo(f"Published image response from {source_name}")
 
         if broadcast_tf:
-            populate_camera_static_transforms(conn, image_response, tf_frames)
+            populate_camera_static_transforms(conn, image_response, tf_frames, prefix=broadcast_tf_predix)
 
 
 def _get_odom_tf_frames():
@@ -111,7 +111,7 @@ def _get_odom_tf_frames():
                 tf_name_raw_vision=tf_name_raw_vision)
 
 
-def populate_camera_static_transforms(conn, image_data, tf_frames):
+def populate_camera_static_transforms(conn, image_data, tf_frames, prefix=""):
     global CAMERA_STATIC_TF_BROADCASTER
     global CAMERA_STATIC_TRANSFORMS
     if CAMERA_STATIC_TF_BROADCASTER is None:
@@ -131,7 +131,7 @@ def populate_camera_static_transforms(conn, image_data, tf_frames):
         local_time = conn.spot_time_to_local(image_data.shot.acquisition_time)
         tf_time = rospy.Time(local_time.seconds, local_time.nanos)
         static_tf = spot_driver.ros_helpers.populateTransformStamped(
-            tf_time, transform.parent_frame_name, frame_name,
+            tf_time, prefix + transform.parent_frame_name, prefix + frame_name,
             transform.parent_tform_child)
         CAMERA_STATIC_TRANSFORMS.append(static_tf)
         CAMERA_STATIC_TF_BROADCASTER.sendTransform(CAMERA_STATIC_TRANSFORMS)
