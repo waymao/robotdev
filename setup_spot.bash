@@ -1,3 +1,4 @@
+#!/bin/bash
 # Run this script by source setup_movo.bash
 if [[ ! $PWD = *robotdev ]]; then
     echo "You must be in the root directory of the robotdev repository."
