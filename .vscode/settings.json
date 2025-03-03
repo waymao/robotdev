@@ -1,3 +1,11 @@
 {
-    "ros.distro": "melodic"
+    "ros.distro": "noetic",
+    "python.autoComplete.extraPaths": [
+        "/home/ericbot/repo/robotdev/spot/ros_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ericbot/repo/robotdev/spot/ros_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
 }

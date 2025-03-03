@@ -22,9 +22,6 @@ if [ -z "$1" ]; then
     rosrun rbd_spot_perception stream_image.py -s \
        frontleft_fisheye_image \
        frontright_fisheye_image \
-       left_fisheye_image \
-       right_fisheye_image \
-       back_fisheye_image \
        hand_color_image \
        -f JPEG -q 50 --pub
 elif [ "$1" -eq 2 ]; then
@@ -32,9 +29,6 @@ elif [ "$1" -eq 2 ]; then
     rosrun rbd_spot_perception stream_image.py -s \
        frontleft_fisheye_image \
        frontright_fisheye_image \
-       left_fisheye_image \
-       right_fisheye_image \
-       back_fisheye_image \
        hand_color_image \
        -f JPEG -q 50 --pub -i 2
 else
