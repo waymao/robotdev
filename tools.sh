@@ -1,12 +1,11 @@
-function confirm()
-{
-    read -p "$1 [y/n] " -n 1 -r
+confirm() {
+    echo -n "$1 [y/n] "
+    read -k 1 -r REPLY
     echo
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-	true && return
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        return 0
     fi
-    false
+    return 1
 }
 
 # https://unix.stackexchange.com/questions/70615/bash-script-echo-output-in-box
@@ -85,10 +84,10 @@ function ubuntu_version_equal {
 
 function useros() {
     if ubuntu_version_equal 20.04; then
-        source /opt/ros/noetic/setup.bash
+        source /opt/ros/noetic/setup.zsh
         true && return
     elif ubuntu_version_equal 16.04; then
-        source /opt/ros/kinetic/setup.bash
+        source /opt/ros/kinetic/setup.zsh
         true && return
     else
         echo -e "No suitable ROS version installed"

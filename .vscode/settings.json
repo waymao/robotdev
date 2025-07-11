@@ -6,6 +6,7 @@
     ],
     "python.analysis.extraPaths": [
         "/home/ericbot/repo/robotdev/spot/ros_ws/devel/lib/python3/dist-packages",
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "./spot/ros_ws/src/spot_ros/spot_driver/src"
     ]
 }

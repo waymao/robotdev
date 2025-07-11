@@ -193,7 +193,11 @@ def main():
                 #         result[i].shot.image.data = bytes(cv_depth)
                 #print(f"FPS: {1/time_taken:.2f}")
                 if args.pub:
-                    rbd_spot.image.ros_publish_image_result(conn, result, publishers, broadcast_tf_predix=static_tf_prefix)
+                    rbd_spot.image.ros_publish_image_result(
+                        conn, result, publishers, 
+                        broadcast_tf=False, 
+                        broadcast_tf_predix=static_tf_prefix
+                    )
                 _used_time = time.time() - _start_time
                 if args.timeout and _used_time > args.timeout:
                     break

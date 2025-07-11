@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # Run this script by source setup_movo.bash
 if [[ ! $PWD = *robotdev ]]; then
     echo "You must be in the root directory of the robotdev repository."
@@ -40,26 +40,25 @@ if [ -n $SPOT_IP ]; then
     echo "Overriding SPOT_IP"
 fi
 if [ -z $SPOT_IP ]; then
-    if [ "$1" == "gouger" ]; then # Gouger
+    if [ "$1" = "gouger" ]; then # Gouger
         echo "Connecting to Gouger"
         SPOT_ID="12"
         SPOT_WIFI_IP="138.16.161.21"
         # SPOT_RLAB_IP="gouger.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
-        SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
+        SPOT_RLAB_IP="128.148.140.21"
         SPOT_ETH_IP="138.16.160.87"
-    elif [ $1 == "tusker" ]; then # Tusker
+    elif [ $1 = "tusker" ]; then # Tusker
         echo "Connecting to Tusker"
         SPOT_ID="22"
         SPOT_WIFI_IP="138.16.161.22"
         # SPOT_RLAB_IP="tusker.rlab.cs.brown.edu"  #"138.16.161.${SPOT_ID}"
-        #SPOT_RLAB_IP="138.16.161.${SPOT_ID}"
-        SPOT_RLAB_IP="192.168.1.4"
+        SPOT_RLAB_IP="128.148.140.${SPOT_ID}"
 
         # this is for spotwifi network on the local ASUS router
         SPOT_ETH_IP="138.16.160.88"
         # SPOT_ETH_IP="192.168.1.122"
 
-    elif [ $1 == "rooter" ]; then # Rooter
+    elif [ $1 = "rooter" ]; then # Rooter
         echo "Connecting to Rooter"
         SPOT_ID="23"
         SPOT_WIFI_IP="138.16.161.23"
@@ -70,11 +69,11 @@ if [ -z $SPOT_IP ]; then
         
         # this is for spotwifi network on the local ASUS router
         # SPOT_ETH_IP="192.168.1.104"
-    elif [ $1 == "snouter" ]; then # Snouter
+    elif [ $1 = "snouter" ]; then # Snouter
         echo "Connecting to Snouter"
         SPOT_ID="24"
         SPOT_WIFI_IP="138.16.161.24"
-        SPOT_RLAB_IP="192.168.1.4"
+        SPOT_RLAB_IP="128.148.140.20"
         
         # this is for spotwifi network on the local ASUS router
         # SPOT_ETH_IP="192.168.1.122"
@@ -138,7 +137,7 @@ function build_spot
         -DCMAKE_BUILD_TYPE=Release\
         -DPYTHON_EXECUTABLE=/usr/bin/python3\
         -DPYTHON_INCLUDE_DIR=/usr/include/python3.8\
-        -DPYTHON_LIBRARY=/usr/lib/x87_64-linux-gnu/libpython3.8.so\
+        -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8.so\
         ${SPOT_ADDITIONAL_BUILD_OPTIONS}\
         $1; then
         echo "SPOT SETUP DONE." >> src/.DONE_SETUP
@@ -188,16 +187,16 @@ if [ ! -d "${SPOT_ROS_PATH}/src" ]; then
 fi
 
 # create a dedicated virtualenv for spot workspace
-if [ ! -d "${SPOT_PATH}/venv/spot" ]; then
-    cd ${SPOT_PATH}/
-    virtualenv -p python3 venv/spot
-    cd ..
-fi
+# if [ ! -d "${SPOT_PATH}/venv/spot" ]; then
+#     cd ${SPOT_PATH}/
+#     virtualenv -p python3 venv/spot
+#     cd ..
+# fi
 
 # activate virtualenv; Note that this is the only
 # functionality of this script if spot has been setup
 # before.
-source ${SPOT_PATH}/venv/spot/bin/activate
+# source ${SPOT_PATH}/venv/spot/bin/activate
 
 if first_time_build $SPOT_ROS_PATH; then
     pip uninstall -y em
@@ -226,16 +225,9 @@ if first_time_build $SPOT_ROS_PATH; then
     sudo apt-get install -y python3-pykdl
 
     # other ROS utlities/packages
-    sudo apt-get install -y ros-noetic-rqt-graph
-    sudo apt-get install -y ros-noetic-rqt-tf-tree
-    sudo apt-get install -y ros-noetic-navigation
-    sudo apt-get install -y ros-noetic-gmapping
-    sudo apt-get install -y ros-noetic-kdl-parser-py
-    sudo apt-get install -y ros-noetic-fiducials
-    sudo apt-get install -y ros-noetic-find-object-2d
-    sudo apt-get install -y ros-noetic-apriltag-ros
-    sudo apt-get install -y ros-noetic-rtabmap
-    sudo apt-get install -y ros-noetic-ros-numpy
+    sudo apt-get install -y ros-noetic-rqt-graph ros-noetic-rqt-tf-tree ros-noetic-navigation ros-noetic-gmapping \
+        ros-noetic-kdl-parser-py ros-noetic-fiducials ros-noetic-find-object-2d ros-noetic-apriltag-ros \
+        ros-noetic-rtabmap ros-noetic-ros-numpy
 
     # Mapping library
     install_rtabmap_ros_from_source
@@ -244,30 +236,30 @@ if first_time_build $SPOT_ROS_PATH; then
     # Uninstall PyQt5 and PyQt5-sip in pip, so that
     # rqt_* GUI software work.
     # reference: https://github.com/ros-visualization/rqt_graph/issues/51#issuecomment-782062642
-    pip uninstall -y PyQt5
-    pip uninstall -y PyQt5-sip
+    # pip uninstall -y PyQt5
+    # pip uninstall -y PyQt5-sip
 
     # Downgrade yaml so that rqt_* stuff runs
     # reference: https://stackoverflow.com/a/69565230/2893053
-    !pip install pyyaml==5.4.1
+    # !pip install pyyaml==5.4.1
 fi
 
 # catkin make and end.
 if first_time_build $SPOT_ROS_PATH; then
     build_spot
-    echo -e "alias dospot='cd ~/repo/robotdev/; source setup_spot.bash'" >> ~/.bashrc
+    echo -e "alias dospot='cd ~/repo/robotdev/; source setup_spot.zsh'" >> ~/.zshrc
 else
     echo -e "If you want to build the spot project, run 'build_spot'"
 fi
 
 export ROS_PACKAGE_PATH=$repo_root/${SPOT_ROS_PATH}/src/:${ROS_PACKAGE_PATH}
 export PYTHONPATH=""
-source $repo_root/${SPOT_ROS_PATH}/devel/setup.bash
+source $repo_root/${SPOT_ROS_PATH}/devel/setup.zsh
 # We'd like to use packages in the virtualenv, what's already on /usr/lib,
 # and in the workspace (done by above step). NOTE: Using /usr/lib is
 # necessary so that PyKDL can be imported (it could only be installed
 # via sudo apt-get install python3-pykdl, for some unknown reason).
-export PYTHONPATH="$repo_root/${SPOT_PATH}/venv/spot/lib/python3.8/site-packages:${PYTHONPATH}:/usr/lib/python3/dist-packages"
+# export PYTHONPATH="~/.local/lib/python3.8/site-packages:${PYTHONPATH}:/usr/lib/python3/dist-packages"
 if confirm "Are you working on the real robot ?"; then
     # Check if the environment variable SPOT_IP is set.
     # If not, then try to detect spot connection and set it.
